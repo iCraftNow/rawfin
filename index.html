@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rawfin — Podcasts that follow the market</title>
+
+  <!-- Google-style font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <meta name="description" content="Rawfin is a modern podcast platform focused on finance, markets, and real-time conversations." />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #202124;
+      --muted: #5f6368;
+      --border: #dadce0;
+      --primary: #1a73e8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .hero {
+      max-width: 640px;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--primary);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .cta:hover {
+      background: #1558b0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 16px 24px;
+      font-size: 14px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Rawfin</div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h1>Podcasts that follow the market.</h1>
+      <p>
+        Rawfin is a modern podcast platform focused on finance, markets,
+        entrepreneurship and real-time economic conversations.
+      </p>
+
+      <a href="https://rawfin.tv/home" class="cta">
+        Discover Rawfin
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <span>© 2025 Rawfin</span>
+    <a href="https://rawfin.tv/home" target="_blank" rel="noopener">Terms</a>
+    <a href="https://rawfin.tv/privacy" target="_blank" rel="noopener">Privacy</a>
+  </footer>
+
+</body>
+</html>

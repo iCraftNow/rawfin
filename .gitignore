@@ -1,0 +1,5 @@
+# Environment variables
+# Do not commit sensitive keys, passwords, or other credentials
+.env
+.env.*
+!/.env.example
