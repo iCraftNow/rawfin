@@ -1,5 +1,45 @@
-# Environment variables
-# Do not commit sensitive keys, passwords, or other credentials
+ ===================================================================
+# Fichiers d'environnement
+# Ne jamais commiter de clés d'API, mots de passe ou autres secrets
+# ===================================================================
 .env
 .env.*
 !/.env.example
+.flowky
+
+# ===================================================================
+# Dépendances
+# Les dépendances sont installées via un gestionnaire de paquets (npm, yarn, etc.)
+# ===================================================================
+/node_modules
+
+# ===================================================================
+# Fichiers de build et de production
+# Ces fichiers sont générés automatiquement
+# ===================================================================
+/dist
+/build
+/.out/
+/.vercel/
+
+# ===================================================================
+# Fichiers de logs et de cache
+# ===================================================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.pnpm-store
+
+# ===================================================================
+# Fichiers système d'exploitation
+# ===================================================================
+.DS_Store
+Thumbs.db
+
+# ===================================================================
+# Fichiers de configuration des éditeurs de code
+# ===================================================================
+.vscode/
+.idea/
+Explication des ajouts
