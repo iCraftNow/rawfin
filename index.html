@@ -43,33 +43,77 @@
   <!-- Google-style font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
+  <!-- Critical CSS - Inlined for fastest LCP -->
   <style>
+    /* Import critical CSS inline */
     :root {
       --bg: #ffffff;
       --text: #202124;
       --muted: #5f6368;
       --border: #dadce0;
       --primary: #1a73e8;
+      --primary-hover: #1558b0;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      --border-radius: 8px;
+      --border-radius-full: 999px;
+      --transition-speed: 0.2s;
     }
 
-    * {
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #202124;
+        --text: #e8eaed;
+        --muted: #9aa0a6;
+        --border: #5f6368;
+      }
+    }
+
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-family);
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: var(--spacing-sm) var(--spacing-md);
+      text-decoration: none;
+      z-index: 10000;
+      border-radius: 0 0 var(--border-radius) 0;
+    }
+
+    .skip-link:focus {
+      top: 0;
     }
 
     header {
-      padding: 24px 32px;
+      padding: var(--spacing-lg) var(--spacing-xl);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -80,80 +124,88 @@
       font-weight: 600;
       font-size: 20px;
       letter-spacing: -0.3px;
+      color: var(--text);
     }
 
     main {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 24px;
-      text-align: center;
     }
 
     .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px var(--spacing-lg);
+      text-align: center;
+      min-height: 500px;
+    }
+
+    .hero-content {
       max-width: 640px;
     }
 
     .hero h1 {
-      font-size: 40px;
+      font-size: clamp(32px, 5vw, 48px);
       font-weight: 600;
       letter-spacing: -0.5px;
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-md);
+      color: var(--text);
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: clamp(16px, 2vw, 20px);
       color: var(--muted);
-      margin-bottom: 32px;
+      margin-bottom: var(--spacing-xl);
+      line-height: 1.7;
     }
 
     .cta {
       display: inline-block;
-      padding: 12px 28px;
+      padding: 14px 32px;
       font-size: 16px;
       font-weight: 500;
       color: #fff;
       background: var(--primary);
-      border-radius: 999px;
+      border-radius: var(--border-radius-full);
       text-decoration: none;
-      transition: background 0.2s ease;
+      transition: all var(--transition-speed) ease;
+      border: none;
+      cursor: pointer;
     }
 
     .cta:hover {
-      background: #1558b0;
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
     }
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 16px 24px;
-      font-size: 14px;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      justify-content: center;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
     }
 
     @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 32px;
+      header {
+        padding: var(--spacing-md) var(--spacing-lg);
       }
+    }
 
-      .hero p {
-        font-size: 16px;
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html {
+        scroll-behavior: auto;
       }
     }
   </style>
+
+  <!-- Non-critical CSS - Lazy loaded -->
+  <link rel="preload" href="/assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/css/main.css"></noscript>
+  <link rel="preload" href="/assets/css/animations.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/assets/css/animations.css"></noscript>
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -194,31 +246,217 @@
 </head>
 
 <body>
+  <!-- Skip to main content for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
 
   <header>
     <div class="logo">Rawfin</div>
   </header>
 
-  <main>
-    <div class="hero">
-      <h1>Podcasts that follow the market.</h1>
-      <p>
-        Rawfin is a modern podcast platform focused on finance, markets,
-        entrepreneurship and real-time economic conversations.
-      </p>
+  <main id="main">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content fade-in">
+        <h1>Podcasts that follow the market.</h1>
+        <p>
+          Rawfin is a modern podcast platform focused on finance, markets,
+          entrepreneurship and real-time economic conversations.
+        </p>
+        <a href="https://rawfin.tv/home" class="cta">
+          Discover Rawfin
+        </a>
+      </div>
+    </section>
 
-      <a href="https://rawfin.tv/home" class="cta">
-        Discover Rawfin
-      </a>
-    </div>
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <h2 class="fade-in">Why Rawfin?</h2>
+        <p class="fade-in">Stay ahead of market trends with expert insights and real-time discussions</p>
+        <div class="features-grid">
+          <div class="feature-card fade-in delay-1">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <h3>Real-time Updates</h3>
+            <p>Stay ahead with live market discussions and breaking financial news</p>
+          </div>
+          <div class="feature-card fade-in delay-2">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <h3>Expert Insights</h3>
+            <p>Learn from seasoned traders, economists, and industry leaders</p>
+          </div>
+          <div class="feature-card fade-in delay-3">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <h3>Community Driven</h3>
+            <p>Join thousands of active listeners and engage in discussions</p>
+          </div>
+          <div class="feature-card fade-in delay-4">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <h3>Smart Alerts</h3>
+            <p>Get notified about breaking market news and new episodes</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter" id="newsletter">
+      <div class="container">
+        <h2>Stay Updated</h2>
+        <p>Join our newsletter for weekly market insights and new episode notifications</p>
+        <form id="newsletter-form" novalidate>
+          <input
+            type="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+            aria-label="Email address"
+            autocomplete="email"
+          />
+          <button type="submit">
+            <span class="button-text">Subscribe</span>
+            <span class="button-loader" hidden>
+              <span class="spinner"></span>
+            </span>
+          </button>
+        </form>
+        <p class="privacy-note">We respect your privacy. Unsubscribe anytime.</p>
+        <div class="feedback" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+      <div class="container">
+        <h2>Ready to level up your market knowledge?</h2>
+        <div class="cta-buttons" style="display: flex; gap: 16px; justify-content: center; margin-top: 24px; flex-wrap: wrap;">
+          <a href="https://rawfin.tv/home" class="cta">Start Listening</a>
+          <a href="https://t.me/rawfin_bot" class="cta" style="background: #0088cc;" target="_blank" rel="noopener">Join Telegram</a>
+        </div>
+        <div class="social-links" style="margin-top: 32px;">
+          <a href="https://x.com/raw_fin_tv" aria-label="Twitter" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61585385042305" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          <a href="https://t.me/rawfin_bot" aria-label="Telegram" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.3 5.1l-2.9 13.7c-.2.9-.7 1.1-1.4.7l-3.9-2.9-1.9 1.8c-.2.2-.4.4-.8.4l.3-3.9 7.4-6.7c.3-.3-.1-.4-.5-.2l-9.1 5.7-3.9-1.2c-.9-.3-.9-.9.2-1.3l15.2-5.9c.7-.2 1.3.2 1.1 1.2z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <span>© 2026 Rawfin. All rights reserved.</span>
-    <a href="/pages/terms.html">Terms</a>
-    <a href="/pages/privacy.html">Privacy</a>
-    <a href="https://t.me/rawfin_bot" target="_blank" rel="noopener">Telegram</a>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3>Rawfin</h3>
+          <p>Podcasts that follow the market.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="https://rawfin.tv/home">Platform</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/pages/privacy.html">Privacy</a></li>
+            <li><a href="/pages/terms.html">Terms</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="https://t.me/rawfin_bot" target="_blank" rel="noopener">Telegram</a></li>
+            <li><a href="https://x.com/raw_fin_tv" target="_blank" rel="noopener">Twitter</a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61585385042305" target="_blank" rel="noopener">Facebook</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Rawfin. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 
+  <!-- Core JavaScript -->
+  <script src="/assets/js/core.js"></script>
+  <script src="/assets/js/api.js"></script>
+
+  <!-- Newsletter functionality -->
+  <script>
+    (function() {
+      const form = document.getElementById('newsletter-form');
+      const feedback = form.querySelector('.feedback');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = form.querySelector('input[type="email"]').value;
+        const button = form.querySelector('button[type="submit"]');
+        const buttonText = button.querySelector('.button-text');
+        const buttonLoader = button.querySelector('.button-loader');
+
+        // Validate email
+        if (!email || !email.includes('@')) {
+          feedback.textContent = 'Please enter a valid email address';
+          feedback.className = 'feedback error';
+          return;
+        }
+
+        // Show loading state
+        button.disabled = true;
+        button.classList.add('button-loading');
+        buttonLoader.hidden = false;
+        feedback.textContent = '';
+        feedback.className = 'feedback';
+
+        try {
+          // Call API
+          await window.RawfinAPI.newsletter.subscribe(email);
+
+          // Success
+          feedback.textContent = 'Success! Check your email to confirm your subscription.';
+          feedback.className = 'feedback success';
+          form.reset();
+        } catch (error) {
+          // Error
+          feedback.textContent = 'Something went wrong. Please try again later.';
+          feedback.className = 'feedback error';
+          console.error('Newsletter subscription error:', error);
+        } finally {
+          // Reset button
+          button.disabled = false;
+          button.classList.remove('button-loading');
+          buttonLoader.hidden = true;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
